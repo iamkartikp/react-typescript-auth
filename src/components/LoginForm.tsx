@@ -1,27 +1,35 @@
 import React, { Component } from 'react';
+import  axios  from 'axios';
 
-class SignUp extends Component {
+interface IProps {
+    addedUsers: object
+}
+
+class LoginForm extends Component<IProps>{
     state = {
         name: null,
-        email: null,
-        password: null       
+        password: null
     }
-    handleChange = e => {
+    handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             [e.target.id]: e.target.value
         })
     }
-    handleSubmit = e => {
+    handleSubmit = (e:React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
-        this.props.addUser(this.state)
+        // const users = this.props.addedUsers;
+        axios.post('http://localhost:5000/users/login', this.state)
+            .then((data) => {
+                alert(data.data)
+            }).catch(data => {
+                alert(data.data)
+            })
     }
     render() {
         return (
             <div className="login-form bg-light p-5 col-12 m-2">
                 <form onSubmit={this.handleSubmit} className="container col-6">
                     <input type="text" id="name" placeholder="Name" 
-                        className="form-control my-2" onChange={this.handleChange} />
-                    <input type="text" id="email" placeholder="E-mail" 
                         className="form-control my-2" onChange={this.handleChange} />
                     <input type="text" id="password" placeholder="Password" 
                         className="form-control my-2" onChange={this.handleChange} />
@@ -32,4 +40,6 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp;
+export default LoginForm;
+
+// RBAC - Role Based Access Control

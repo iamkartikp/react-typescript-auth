@@ -14,7 +14,7 @@ class App extends Component {
       
     ]
   }
-  addUser = user => {
+  addUser = (user:object) => {
     const users = [...this.state.users, user]
     this.setState({
       users

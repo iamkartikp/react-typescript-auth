@@ -1,32 +1,34 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
-class LoginForm extends Component {
+class SignUp extends Component<any>{
     state = {
         name: null,
-        password: null
+        email: null,
+        password: null       
     }
-    handleChange = e => {
+    handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
-            [e.target.id]: e.target.value
+            [e.currentTarget.id]: e.currentTarget.value
         })
     }
-    handleSubmit = e => {
+    handleSubmit = (e:React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const {users} = this.props.addedUsers;
-        users.map(user => {
-            if(user.name === this.state.name && user.password === this.state.password)
-                console.log(this.props)
-            else
-                return <Redirect to="/"/>
-        })
-        
+        this.props.addUser(this.state)
+        axios.post('http://localhost:5000/users/', this.state)
+            .then(() => {
+                console.log('User added!')
+            }).catch(err => {
+                alert('Error!' +err)
+            })
     }
     render() {
         return (
             <div className="login-form bg-light p-5 col-12 m-2">
                 <form onSubmit={this.handleSubmit} className="container col-6">
                     <input type="text" id="name" placeholder="Name" 
+                        className="form-control my-2" onChange={this.handleChange} />
+                    <input type="text" id="email" placeholder="E-mail" 
                         className="form-control my-2" onChange={this.handleChange} />
                     <input type="text" id="password" placeholder="Password" 
                         className="form-control my-2" onChange={this.handleChange} />
@@ -37,6 +39,4 @@ class LoginForm extends Component {
     }
 }
 
-export default LoginForm;
-
-// RBAC - Role Based Access Control
+export default SignUp;
