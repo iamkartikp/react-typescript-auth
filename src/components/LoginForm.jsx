@@ -1,0 +1,42 @@
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+
+class LoginForm extends Component {
+    state = {
+        name: null,
+        password: null
+    }
+    handleChange = e => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
+    handleSubmit = e => {
+        e.preventDefault();
+        const {users} = this.props.addedUsers;
+        users.map(user => {
+            if(user.name === this.state.name && user.password === this.state.password)
+                console.log(this.props)
+            else
+                return <Redirect to="/"/>
+        })
+        
+    }
+    render() {
+        return (
+            <div className="login-form bg-light p-5 col-12 m-2">
+                <form onSubmit={this.handleSubmit} className="container col-6">
+                    <input type="text" id="name" placeholder="Name" 
+                        className="form-control my-2" onChange={this.handleChange} />
+                    <input type="text" id="password" placeholder="Password" 
+                        className="form-control my-2" onChange={this.handleChange} />
+                    <button className="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        )
+    }
+}
+
+export default LoginForm;
+
+// RBAC - Role Based Access Control
