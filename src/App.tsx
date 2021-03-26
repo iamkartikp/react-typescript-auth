@@ -4,9 +4,10 @@ import LoginForm from './components/LoginForm';
 import Home from './components/Home';
 import './App.css';
 import { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import SignUp from './components/SignUp';
+import NotFound from './components/NotFound';
 
 class App extends Component {
   state = {
@@ -24,16 +25,16 @@ class App extends Component {
     console.log(this.state)
     return (
       <div className="App">
-        <BrowserRouter>
         <NavBar />
           <Switch>
+            <Route path="/not-found" component={NotFound} />
             <Route exact path="/" component={Home}/>
             <Route path="/signup" 
-              component={() => <SignUp addUser={this.addUser}/> }/>
+              render={props => <SignUp addUser={this.addUser} {...props}/> }/>
             <Route path="/login" 
-              component={() => <LoginForm addedUsers={this.state} />} />
+              render={props => <LoginForm addedUsers={this.state} {...props} />} />
+            <Redirect to="/not-found" />
           </Switch>
-        </BrowserRouter>
       </div>
     );
   }
