@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import  axios  from 'axios';
 
 interface IProps {
-    addedUsers: object;
-    history: any;
+    history: {
+        push: any
+    };
+    isLogged: any
 }
 
 class LoginForm extends Component<IProps>{
@@ -24,6 +26,7 @@ class LoginForm extends Component<IProps>{
         axios.post('http://localhost:5000/users/login', this.state)
             .then(() => {
                 this.props.history.push("/")
+                this.props.isLogged(this.state);
             }).catch(data => {
                 console.log(data.data)
             })

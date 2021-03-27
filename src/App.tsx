@@ -13,12 +13,18 @@ class App extends Component {
   state = {
     users : [
       
-    ]
+    ],
+    isLoggedIn: false
   }
   addUser = (user:object) => {
     const users = [...this.state.users, user]
     this.setState({
       users
+    })
+  }
+  isLogged = (user:object) => {
+    this.setState({
+      isLoggedIn: true
     })
   }
   render() {
@@ -28,11 +34,12 @@ class App extends Component {
         <NavBar />
           <Switch>
             <Route path="/not-found" component={NotFound} />
-            <Route exact path="/" component={Home}/>
+            <Route exact path="/" render={ props => 
+              <Home isLogged={this.state.users}/>}/>
             <Route path="/signup" 
               render={props => <SignUp addUser={this.addUser} {...props}/> }/>
             <Route path="/login" 
-              render={props => <LoginForm addedUsers={this.state} {...props} />} />
+              render={props => <LoginForm isLogged={this.isLogged} {...props} />} />
             <Redirect to="/not-found" />
           </Switch>
       </div>
