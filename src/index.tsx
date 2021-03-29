@@ -5,10 +5,26 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 
+import { Provider } from 'react-redux';
+import { applyMiddleware, compose, createStore } from 'redux';
+
+import { rootReducer } from './components/reducers';
+import thunk from 'redux-thunk';
+
+const middleware = [thunk];
+
+const store = createStore(rootReducer, 
+  compose(
+    applyMiddleware(...middleware),
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__())
+  );
+
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>  ,
   document.getElementById('root')
 );
 

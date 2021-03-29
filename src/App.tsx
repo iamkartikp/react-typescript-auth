@@ -28,10 +28,10 @@ class App extends Component {
     })
   }
   render() {
-    console.log(this.state)
     return (
       <div className="App">
         <NavBar />
+        <p>Count: </p>
           <Switch>
             <Route path="/not-found" component={NotFound} />
             <Route exact path="/" render={ props => 

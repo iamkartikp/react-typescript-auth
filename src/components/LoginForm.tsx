@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import  axios  from 'axios';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { loginUser } from './actions/demo'
 
 interface IProps {
     history: {
@@ -22,14 +25,6 @@ class LoginForm extends Component<IProps>{
     handleSubmit = (e:React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
         // const users = this.props.addedUsers;
-        
-        axios.post('http://localhost:5000/users/login', this.state)
-            .then(() => {
-                this.props.history.push("/")
-                this.props.isLogged(this.state);
-            }).catch(data => {
-                console.log(data.data)
-            })
     }
     render() {
         return (
@@ -46,6 +41,10 @@ class LoginForm extends Component<IProps>{
     }
 }
 
-export default LoginForm;
+const mapStateToProps = (state: any) => ({
+    data: state.data.items
+})
+
+export default connect(mapStateToProps, {loginUser})(LoginForm);
 
 // RBAC - Role Based Access Control
