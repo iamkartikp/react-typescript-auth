@@ -15,14 +15,23 @@ import axios from "axios";
 //                 console.log(data.data)
 //             })
 
-export const loginUser = () => (dispatch:any) => {
-    axios.post('http://localhost:5000/users/login', )
-        .then(() => {
-            console.log('user logged in')
-        }).then(data => {
+export const loginUser = (postData: object) => (dispatch:any) => {
+    axios.post('http://localhost:5000/users/login', postData )
+        .then(data => {
             dispatch({
                 type: 'LOGIN',
                 payload: data
             })
+            console.log(data)
         })
+}
+
+export const registerUser = (postData:object) => (dispatch:any) => {
+    axios.post('http://localhost:5000/users/', postData)
+            .then(() => {
+                console.log('User added!')
+            }).then(data => dispatch({
+                type: 'CREATE_USER',
+                payload: data
+            }))
 }

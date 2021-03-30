@@ -31,7 +31,6 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar />
-        <p>Count: </p>
           <Switch>
             <Route path="/not-found" component={NotFound} />
             <Route exact path="/" render={ props => 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { registerUser } from './actions/demo';
 
 class SignUp extends Component<any>{
     state = {
@@ -14,13 +15,8 @@ class SignUp extends Component<any>{
     }
     handleSubmit = (e:React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
-        this.props.addUser(this.state)
-        axios.post('http://localhost:5000/users/', this.state)
-            .then(() => {
-                console.log('User added!')
-            }).catch(err => {
-                alert('Error!' +err)
-            })
+        this.props.registerUser(this.state)
+        
     }
     render() {
         return (
@@ -39,4 +35,8 @@ class SignUp extends Component<any>{
     }
 }
 
-export default SignUp;
+// const mapStateToProps = (state:any) => {
+//     data: state.posts
+// }
+
+export default connect(null,{registerUser})(SignUp);

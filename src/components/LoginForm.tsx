@@ -8,14 +8,13 @@ interface IProps {
     history: {
         push: any
     };
-    isLogged: any
+    isLogged: any,
+    loginUser: any
 }
 
 class LoginForm extends Component<IProps>{
-    state = {
-        name: null,
-        password: null,
-        isAuth: false
+    componentWillMount() {
+        this.props.loginUser();
     }
     handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
@@ -25,15 +24,18 @@ class LoginForm extends Component<IProps>{
     handleSubmit = (e:React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
         // const users = this.props.addedUsers;
+        this.props.loginUser(this.state);
     }
     render() {
         return (
             <div className="login-form bg-light p-5 col-12 m-2">
                 <form onSubmit={this.handleSubmit} className="container col-6">
                     <input type="text" id="name" placeholder="Name" 
-                        className="form-control my-2" onChange={this.handleChange} />
+                        className="form-control my-2" onChange={this.handleChange} 
+                        required/>
                     <input type="password" id="password" placeholder="Password" 
-                        className="form-control my-2" onChange={this.handleChange} />
+                        className="form-control my-2" onChange={this.handleChange} 
+                        required/>
                     <button className="btn btn-primary">Submit</button>
                 </form>
             </div>
@@ -41,10 +43,11 @@ class LoginForm extends Component<IProps>{
     }
 }
 
-const mapStateToProps = (state: any) => ({
-    data: state.data.items
-})
+// const mapStateToProps = (state: any) => ({
+//     // from root reducer 
+//     data: state.demo
+// })
 
-export default connect(mapStateToProps, {loginUser})(LoginForm);
+export default connect(null, {loginUser})(LoginForm);
 
 // RBAC - Role Based Access Control
