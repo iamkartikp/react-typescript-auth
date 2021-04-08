@@ -8,8 +8,8 @@ class Home extends Component<IProps> {
     render() {
         return (
             <div>
-                {this.props.isLogged.length === 0 ?  <h1>Not Logged in</h1> 
-                    :<h1>Home</h1>}
+                {localStorage.getItem('user') ?  <h1>Welcome {localStorage.getItem('user')}</h1> 
+                    : <h1>Not Logged in</h1>}
             </div>
         )
     }
