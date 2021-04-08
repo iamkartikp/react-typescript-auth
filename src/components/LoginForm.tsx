@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
-// import PropTypes from 'prop-types';
-=======
->>>>>>> 02afcd5a9df0d6be11e43317f582b72ca4ce6785
 import { loginUser } from './actions/demo'
 
 interface IProps {
@@ -15,14 +11,9 @@ interface IProps {
 }
 
 class LoginForm extends Component<IProps>{
-<<<<<<< HEAD
-    componentDidMount() {
-        
-=======
     state = {
         name: null,
         password: null
->>>>>>> 02afcd5a9df0d6be11e43317f582b72ca4ce6785
     }
     handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         this.setState({

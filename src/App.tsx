@@ -9,6 +9,7 @@ import NavBar from './components/NavBar';
 import SignUp from './components/SignUp';
 import NotFound from './components/NotFound';
 import Logout from './components/Logout';
+import Profile from './components/Profile';
 
 class App extends Component {
   state = {
@@ -36,6 +37,11 @@ class App extends Component {
             <Route path="/not-found" component={NotFound} />
             <Route exact path="/" render={ props => 
               <Home isLogged={this.state.users}/>}/>
+            <Route path="/profile" 
+              render={props => {
+                if(!localStorage.getItem('user')) return <Redirect to='login'/>
+                return <Profile />
+              }}/>
             <Route path="/signup" 
               render={props => <SignUp addUser={this.addUser} {...props}/> }/>
             <Route path="/login" 

@@ -15,28 +15,19 @@ import axios from "axios";
 //                 console.log(data.data)
 //             })
 
-<<<<<<< HEAD
-export const loginUser = (postData: {name: string, pasword: string}) => (dispatch:any) => {
-=======
 export const loginUser = (postData: any) => (dispatch:any) => {
->>>>>>> 02afcd5a9df0d6be11e43317f582b72ca4ce6785
     axios.post('http://localhost:5000/users/login', postData )
         .then(data => {
             dispatch({
                 type: 'LOGIN',
                 payload: data
             })
-<<<<<<< HEAD
-        }).catch(err => {
-            console.log(err);
-=======
             if(data.data === 'Login successful!') {
                     window.location.href = '/';
                     localStorage.setItem('user',postData.name)
                 }
             else
                 alert(data.data)
->>>>>>> 02afcd5a9df0d6be11e43317f582b72ca4ce6785
         })
         
 }

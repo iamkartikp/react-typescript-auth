@@ -19,7 +19,10 @@ class NavBar extends Component {
                     {localStorage.getItem('user') && 
                         <React.Fragment>
                             <p className="text-light mx-2">
-                                <Link to='logout'>Logout</Link>
+                                <Link to='/logout'>Logout</Link>
+                            </p>
+                            <p className="text-light mx-2">
+                                <Link to='/profile'>Profile</Link>
                             </p>
                         </React.Fragment>    
                     }
