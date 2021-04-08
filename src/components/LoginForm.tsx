@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import  axios  from 'axios';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { loginUser } from './actions/demo'
 
 interface IProps {
@@ -13,8 +12,8 @@ interface IProps {
 }
 
 class LoginForm extends Component<IProps>{
-    componentWillMount() {
-        this.props.loginUser();
+    componentDidMount() {
+        
     }
     handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
