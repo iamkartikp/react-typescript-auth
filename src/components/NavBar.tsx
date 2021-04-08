@@ -9,10 +9,20 @@ class NavBar extends Component {
                     <Link to="/">NavBar</Link>
                 </h1>
                 <div className="d-flex">
-                    <p className="text-light mx-2"> 
-                        <Link to="/login">Login</Link> </p>
-                    <p className="text-light mx-2"> 
-                        <Link to="/signup">Signup</Link> </p>
+                    {!localStorage.getItem('user') && 
+                        <React.Fragment>
+                            <p className="text-light mx-2"> 
+                                <Link to="/login">Login</Link> </p>
+                            <p className="text-light mx-2"> 
+                            <Link to="/signup">Signup</Link> </p>
+                        </React.Fragment>}
+                    {localStorage.getItem('user') && 
+                        <React.Fragment>
+                            <p className="text-light mx-2">
+                                <Link to='logout'>Logout</Link>
+                            </p>
+                        </React.Fragment>    
+                    }
                 </div>
             </div>
         )

@@ -8,13 +8,14 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import SignUp from './components/SignUp';
 import NotFound from './components/NotFound';
+import Logout from './components/Logout';
 
 class App extends Component {
   state = {
     users : [
       
     ],
-    isLoggedIn: false
+    isLoggedIn: localStorage.getItem('user')
   }
   addUser = (user:object) => {
     const users = [...this.state.users, user]
@@ -39,6 +40,7 @@ class App extends Component {
               render={props => <SignUp addUser={this.addUser} {...props}/> }/>
             <Route path="/login" 
               render={props => <LoginForm isLogged={this.isLogged} {...props} />} />
+            <Route path='/logout' component={Logout}/>
             <Redirect to="/not-found" />
           </Switch>
       </div>
